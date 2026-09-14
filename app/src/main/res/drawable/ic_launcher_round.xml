@@ -1,0 +1,59 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Circular Background Canvas -->
+    <path
+        android:fillColor="#0B0F19"
+        android:pathData="M54,54m-52,0a52,52 0 1,1 104,0a52,52 0 1,1 -104,0" />
+
+    <path
+        android:fillColor="#141E33"
+        android:pathData="M54,54m-44,0a44,44 0 1,1 88,0a44,44 0 1,1 -88,0" />
+
+    <!-- Orbital Ring Back Arc -->
+    <path
+        android:strokeColor="#2563EB"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M68,36 A36,18 25 0,0 30,50" />
+
+    <!-- Main White Circular Speech Bubble with Tail -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1"
+        android:pathData="M54,26 A26,26 0 1,1 34,70 L30,80 L42,76 A26,26 0 0,1 54,26 Z" />
+
+    <!-- 3 Message Ellipsis Dots Inside Speech Bubble -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M43,52m-4.5,0a4.5,4.5 0 1,1 9,0a4.5,4.5 0 1,1 -9,0" />
+    <path
+        android:fillColor="#3B82F6"
+        android:pathData="M54,52m-4.5,0a4.5,4.5 0 1,1 9,0a4.5,4.5 0 1,1 -9,0" />
+    <path
+        android:fillColor="#60A5FA"
+        android:pathData="M65,52m-4.5,0a4.5,4.5 0 1,1 9,0a4.5,4.5 0 1,1 -9,0" />
+
+    <!-- Orbital Ring Front Arc (Electric Blue Gradient Accent) -->
+    <path
+        android:strokeColor="#3B82F6"
+        android:strokeWidth="8.5"
+        android:strokeLineCap="round"
+        android:pathData="M22,62 A48,24 25 0,0 92,44" />
+
+    <!-- Orbital Satellite Node Sphere at Top-Right -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M84,36m-9,0a9,9 0 1,1 18,0a9,9 0 1,1 -18,0" />
+    <path
+        android:fillColor="#60A5FA"
+        android:pathData="M84,36m-6,0a6,6 0 1,1 12,0a6,6 0 1,1 -12,0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M84,36m-2.5,0a2.5,2.5 0 1,1 5,0a2.5,2.5 0 1,1 -5,0" />
+
+</vector>

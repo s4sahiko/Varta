@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Varta</string>
+    <string name="push_to_talk">HOLD TO TALK</string>
+    <string name="transmitting">TRANSMITTING…</string>
+    <string name="listening">Listening…</string>
+    <string name="idle">System Standby</string>
+    <string name="alert_mode">ALERT MODE</string>
+    <string name="select_language">Language</string>
+    <string name="notif_channel_service">Voice relay running</string>
+    <string name="notif_channel_alert">Emergency alerts</string>
+    <string name="mesh_status_disconnected">No peers nearby</string>
+    <string name="wifi_direct">Wi-Fi Direct</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="message_log_title">Broadcast Activity Log</string>
+    <string name="sent">SENT</string>
+    <string name="received">RECEIVED</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#121417</color>
+    <color name="primary_dark">#000000</color>
+    <color name="background">#F8F9FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F1F3F5</color>
+    <color name="surface_stroke">#E5E7EB</color>
+    <color name="on_background">#121417</color>
+    <color name="text_primary">#121417</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_muted">#9CA3AF</color>
+    <color name="accent_emerald">#10B981</color>
+    <color name="accent_emerald_dark">#059669</color>
+    <color name="accent_emerald_light">#ECFDF5</color>
+    <color name="accent_cyan">#0284C7</color>
+    <color name="accent_cyan_light">#F0F9FF</color>
+    <color name="alert_red">#EF4444</color>
+    <color name="alert_red_light">#FEF2F2</color>
+    <color name="amber">#F59E0B</color>
+    <color name="amber_light">#FFFBEB</color>
+</resources>

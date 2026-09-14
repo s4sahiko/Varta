@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0B1120">
+
+    <!-- OpenStreetMap View -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Top Tactical Route & Navigation Panel -->
+    <LinearLayout
+        android:id="@+id/topControlsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Top Header Bar -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/topHudBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#F00F172A"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:strokeColor="#334155"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="#FFFFFF" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tactical Map &amp; Land Routing"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13.5sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/gpsStatusText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:text="GPS: Acquiring fix..."
+                        android:textColor="#10B981"
+                        android:textSize="10.5sp" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/toggleSearchPanelButton"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_search"
+                    app:tint="#10B981" />
+
+                <ImageButton
+                    android:id="@+id/layerToggleButton"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_layers"
+                    app:tint="#FFFFFF" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Place-to-Place Land Path Planner Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/routePlannerCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#F50F172A"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:strokeColor="#334155"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Inputs Column -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <!-- Origin Input Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:background="@drawable/bg_card_surface"
+                            android:backgroundTint="#1E293B"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="10dp">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:background="@drawable/bg_circle_button"
+                                android:backgroundTint="#10B981" />
+
+                            <EditText
+                                android:id="@+id/startPlaceInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:hint="Start place or 'My Location'"
+                                android:imeOptions="actionNext"
+                                android:inputType="textPostalAddress"
+                                android:singleLine="true"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#94A3B8"
+                                android:textSize="12sp" />
+
+                            <ImageButton
+                                android:id="@+id/useGpsOriginButton"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="Use Current GPS"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_my_location"
+                                app:tint="#10B981" />
+                        </LinearLayout>
+
+                        <!-- Destination Input Row -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/bg_card_surface"
+                            android:backgroundTint="#1E293B"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="10dp">
+
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:background="@drawable/bg_circle_button"
+                                android:backgroundTint="#EF4444" />
+
+                            <EditText
+                                android:id="@+id/destPlaceInput"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="4dp"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:hint="Enter destination place name"
+                                android:imeOptions="actionDone"
+                                android:inputType="textPostalAddress"
+                                android:singleLine="true"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#94A3B8"
+                                android:textSize="12sp" />
+
+                            <ImageButton
+                                android:id="@+id/clearDestButton"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_delete"
+                                app:tint="#94A3B8" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Swap Places Button -->
+                    <ImageButton
+                        android:id="@+id/swapPlacesButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_card_surface"
+                        android:backgroundTint="#1E293B"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_swap"
+                        app:tint="#10B981" />
+
+                </LinearLayout>
+
+                <!-- Travel Mode & Action Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Mode Toggle Buttons -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:background="@drawable/bg_card_surface"
+                        android:backgroundTint="#1E293B"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/modeDriveButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_pill_active"
+                            android:gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:text="🚗 Drive"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/modeWalkButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:text="🚶 Walk"
+                            android:textColor="#94A3B8"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/routeProgressBar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:indeterminateTint="#10B981"
+                        android:visibility="gone" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <!-- Plot Land Route Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/plotLandRouteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:backgroundTint="#10B981"
+                        android:paddingHorizontal="14dp"
+                        android:text="Plot Land Route"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11.5sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="12dp"
+                        app:icon="@drawable/ic_route"
+                        app:iconSize="14dp"
+                        app:iconTint="#FFFFFF" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Side Map Controls FABs -->
+    <LinearLayout
+        android:id="@+id/sideControlsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottomInfoCard"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Clear Active Route FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/clearRouteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="Clear Route"
+            android:visibility="gone"
+            app:backgroundTint="#1E293B"
+            app:elevation="4dp"
+            app:fabCustomSize="42dp"
+            app:maxImageSize="20dp"
+            app:srcCompat="@drawable/ic_delete"
+            app:tint="#EF4444" />
+
+        <!-- Compass & Reset North FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/compassFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Reset North Orientation"
+            app:backgroundTint="#1E293B"
+            app:elevation="4dp"
+            app:fabCustomSize="38dp"
+            app:maxImageSize="20dp"
+            app:srcCompat="@drawable/ic_navigation"
+            app:tint="#10B981" />
+
+        <!-- Auto-Rotate Heading Lock FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/autoRotateFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Toggle Auto-Rotate Heading"
+            app:backgroundTint="#1E293B"
+            app:elevation="4dp"
+            app:fabCustomSize="38dp"
+            app:maxImageSize="18dp"
+            app:srcCompat="@drawable/ic_route"
+            app:tint="#FFFFFF" />
+
+        <!-- Zoom In FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/zoomInFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="Zoom In"
+            app:backgroundTint="#1E293B"
+            app:elevation="4dp"
+            app:fabCustomSize="38dp"
+            app:maxImageSize="18dp"
+            app:srcCompat="@drawable/ic_send"
+            android:rotation="270"
+            app:tint="#FFFFFF" />
+
+        <!-- Zoom Out FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/zoomOutFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="Zoom Out"
+            app:backgroundTint="#1E293B"
+            app:elevation="4dp"
+            app:fabCustomSize="38dp"
+            app:maxImageSize="18dp"
+            app:srcCompat="@drawable/ic_send"
+            android:rotation="90"
+            app:tint="#FFFFFF" />
+
+        <!-- My Location Center FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/myLocationFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="My Location"
+            app:backgroundTint="#10B981"
+            app:elevation="6dp"
+            app:fabCustomSize="50dp"
+            app:maxImageSize="24dp"
+            app:srcCompat="@drawable/ic_my_location"
+            app:tint="#FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- Bottom Tactical HUD Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomInfoCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="#F00F172A"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="8dp"
+        app:strokeColor="#334155"
+        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- Route Summary Info Header -->
+            <LinearLayout
+                android:id="@+id/routeHeaderLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/routeTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="LAND PATH ROUTE"
+                    android:textColor="#10B981"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/routeInstructionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Road Network Active"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Metrics Grid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Metric 1: Distance / Lat -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/metric1Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COORDINATES"
+                        android:textColor="#94A3B8"
+                        android:textSize="9.5sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/metric1Value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="--.----°, --.----°"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Metric 2: Bearing / Speed -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/metric2Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HEADING / SPEED"
+                        android:textColor="#94A3B8"
+                        android:textSize="9.5sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/metric2Value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0° N • 0 km/h"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Metric 3: ETA / Accuracy -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/metric3Label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ACCURACY"
+                        android:textColor="#94A3B8"
+                        android:textSize="9.5sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/metric3Value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="±-- m"
+                        android:textColor="#10B981"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Navigation Follow Button (Visible when Route is plotted) -->
+            <LinearLayout
+                android:id="@+id/routeActionButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/followRouteButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:backgroundTint="#10B981"
+                    android:text="Start Following Route"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12.5sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp"
+                    app:icon="@drawable/ic_navigation"
+                    app:iconSize="16dp"
+                    app:iconTint="#FFFFFF" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
